@@ -1,22 +1,30 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
 
-import { AppComponent } from './app.component';
-import { HeaderComponent } from './header/header.component';
-import { BodyComponent } from './body/body.component';
-import { FooterComponent } from './footer/footer.component';
+import { AppRoutingModule } from './app-routing.module';
+
+import { AppLayoutComponent } from './app-layout/app-layout.component';
+import { HeaderComponent } from './app-layout/header/header.component';
+import { BodyComponent } from './app-layout/body/body.component';
+import { FooterComponent } from './app-layout/footer/footer.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { GamesComponent } from './games/games.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppLayoutComponent,
     HeaderComponent,
     BodyComponent,
     FooterComponent,
+    DashboardComponent,
+    GamesComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppLayoutComponent]
 })
 export class AppModule { }

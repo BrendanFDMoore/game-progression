@@ -1,7 +1,7 @@
 import { TestBed, async } from '@angular/core/testing';
-import { AppComponent } from './app.component';
+import { AppLayoutComponent } from './app-layout.component';
 
-describe('AppComponent', () => {
+describe('AppLayoutComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
