@@ -1,0 +1,11 @@
+@import '~src/styles.scss';
+
+.c-app-header {
+  // width: 100%;
+  background-color: $dark-blue;
+  color: $light-text;
+
+  h1 {
+    font-weight: bold;
+  }
+}
