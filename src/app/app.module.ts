@@ -17,8 +17,6 @@ import { GamesComponent } from './games/games.component';
     HeaderComponent,
     BodyComponent,
     FooterComponent,
-    DashboardComponent,
-    GamesComponent,
   ],
   imports: [
     BrowserModule,

@@ -6,10 +6,10 @@ import { GamesComponent } from './games/games.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
-  // { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
-  // { path: 'games', loadChildren: './games/games.module#GamesModule' },
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'games', component: GamesComponent },
+  { path: 'dashboard', loadChildren: './dashboard/dashboard.module#DashboardModule' },
+  { path: 'games', loadChildren: './games/games.module#GamesModule' },
+  // { path: 'dashboard', component: DashboardComponent },
+  // { path: 'games', component: GamesComponent },
 ];
 
 @NgModule({

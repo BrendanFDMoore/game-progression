@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-root',
+  selector: 'gp-root',
   templateUrl: './app-layout.component.html',
   styleUrls: ['./app-layout.component.scss']
 })

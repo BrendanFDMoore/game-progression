@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-body',
+  selector: 'gp-body',
   templateUrl: './body.component.html',
   styleUrls: ['./body.component.scss']
 })
