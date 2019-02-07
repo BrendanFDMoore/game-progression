@@ -3,9 +3,13 @@
     &nbsp;
   </div>
   <div class="menu-item">
-    <a routerLink="/dashboard">Dashboard</a>
+    <a routerLink="/dashboard" [routerLinkActive]="'is-active-menu-item'">
+      Dashboard
+    </a>
   </div>
   <div class="menu-item">
-    <a routerLink="/games">Games</a>
+    <a routerLink="/games" [routerLinkActive]="'is-active-menu-item'">
+      Games
+    </a>
   </div>
 </div>
