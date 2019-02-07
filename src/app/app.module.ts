@@ -1,13 +1,16 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
+import { ProfileService } from './root/services/profile.service';
 
 import {
   RootComponent,
   HeaderComponent,
   MenuComponent,
+  ProfileComponent,
   BodyComponent,
   FooterComponent,
 } from './root/components';
@@ -17,14 +20,18 @@ import {
     RootComponent,
     HeaderComponent,
     MenuComponent,
+    ProfileComponent,
     BodyComponent,
     FooterComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    ProfileService,
+  ],
   bootstrap: [RootComponent]
 })
 export class AppModule { }

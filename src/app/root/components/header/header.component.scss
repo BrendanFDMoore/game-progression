@@ -2,7 +2,7 @@
 
 .c-gp-header {
   display: grid;
-  grid-template-columns: '1fr 200px';
+  grid-template-columns: 1fr 250px;
   grid-template-areas:
     "title profile"
     "menu menu";
@@ -10,6 +10,8 @@
   color: $light-text;
 
   .title {
+    justify-self: start;
+    align-self: center;
     padding-left: 25px;
     grid-area: title;
     h1 {
