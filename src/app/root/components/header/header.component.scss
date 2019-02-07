@@ -1,11 +1,30 @@
 @import '~src/variables.scss';
 
 .c-gp-header {
-  // width: 100%;
+  display: grid;
+  grid-template-columns: '1fr 200px';
+  grid-template-areas:
+    "title profile"
+    "menu menu";
   background-color: $dark-blue;
   color: $light-text;
 
-  h1 {
-    font-weight: bold;
+  .title {
+    padding-left: 25px;
+    grid-area: title;
+    h1 {
+      font-weight: bold;
+      font-size: 24px;
+    }
+  }
+
+  .profile {
+    grid-area: profile;
+    justify-self: center;
+    align-self: center;
+  }
+
+  .menu {
+    grid-area: menu;
   }
 }

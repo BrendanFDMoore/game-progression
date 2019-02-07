@@ -1,0 +1,23 @@
+@import '~src/variables.scss';
+
+.c-gp-menu {
+  height: 40px;
+  display: grid;
+  grid-column-gap: 20px;
+  grid-template-columns: 25px repeat(5, 100px) 1fr;
+  background-color: $blue;
+  color: $light-text;
+
+  .menu-item {
+    justify-self: stretch;
+    align-self: center;
+    text-align: center;
+
+    a {
+      color: $light-text;
+      text-decoration: none;
+      font-size: 20px;
+      // text-transform: uppercase;
+    }
+  }
+}
