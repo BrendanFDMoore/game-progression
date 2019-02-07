@@ -4,11 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { GamesComponent } from './components/games/games.component';
 
-console.log('games module file...');
-
-const routes: Routes = [
-  { path: '', component: GamesComponent },
-];
+import { GamesRoutingModule } from './games-routing.module';
 
 @NgModule({
   declarations: [
@@ -16,8 +12,7 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes),
+    GamesRoutingModule
   ],
-  exports: [ RouterModule ],
 })
 export class GamesModule { }
