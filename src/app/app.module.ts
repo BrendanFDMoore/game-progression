@@ -4,16 +4,21 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { AppRoutingModule } from './app-routing.module';
 
-import { AppLayoutComponent } from './app-layout/app-layout.component';
-import { HeaderComponent } from './app-layout/header/header.component';
-import { BodyComponent } from './app-layout/body/body.component';
-import { FooterComponent } from './app-layout/footer/footer.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { GamesComponent } from './games/games.component';
+import { RootComponent } from './root/components/root/root.component';
+import { HeaderComponent } from './root/components/header/header.component';
+import { BodyComponent } from './root/components/body/body.component';
+import { FooterComponent } from './root/components/footer/footer.component';
+
+// import {
+//   RootComponent,
+//   HeaderComponent,
+//   BodyComponent,
+//   FooterComponent,
+// } from './root/components';
 
 @NgModule({
   declarations: [
-    AppLayoutComponent,
+    RootComponent,
     HeaderComponent,
     BodyComponent,
     FooterComponent,
@@ -23,6 +28,6 @@ import { GamesComponent } from './games/games.component';
     AppRoutingModule,
   ],
   providers: [],
-  bootstrap: [AppLayoutComponent]
+  bootstrap: [RootComponent]
 })
 export class AppModule { }

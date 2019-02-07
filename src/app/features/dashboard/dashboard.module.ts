@@ -2,22 +2,21 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
-import { GamesComponent } from './games.component';
-
-console.log('games module file...');
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+console.log('dashboard module file...');
 
 const routes: Routes = [
-  { path: '', component: GamesComponent },
+  { path: '', component: DashboardComponent },
 ];
 
 @NgModule({
   declarations: [
-    GamesComponent,
+    DashboardComponent,
   ],
   imports: [
-    CommonModule,
     RouterModule.forChild(routes),
+    CommonModule
   ],
   exports: [ RouterModule ],
 })
-export class GamesModule { }
+export class DashboardModule { }
