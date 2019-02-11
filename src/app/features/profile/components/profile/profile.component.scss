@@ -1,0 +1,10 @@
+@import '~src/variables.scss';
+
+.c-gp-profile {
+  background-color: $light-blue;
+  color: $dark-text;
+}
+
+// :host {
+// host is the outer tag bits
+// }

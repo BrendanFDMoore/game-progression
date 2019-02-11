@@ -6,5 +6,4 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./games.component.scss']
 })
 export class GamesComponent {
-  @Input() title: string;
 }

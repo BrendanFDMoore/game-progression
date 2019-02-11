@@ -2,11 +2,11 @@ import { Component, OnInit, OnChanges } from '@angular/core';
 import { ProfileService } from '../../services/profile.service';
 
 @Component({
-  selector: 'gp-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss']
+  selector: 'gp-profile-card',
+  templateUrl: './profile-card.component.html',
+  styleUrls: ['./profile-card.component.scss']
 })
-export class ProfileComponent implements OnInit {
+export class ProfileCardComponent implements OnInit {
   public profile: any;
   public ready = false;
 

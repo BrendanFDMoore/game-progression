@@ -1,6 +1,6 @@
 @import '~src/variables.scss';
 
-.c-gp-profile {
+.c-gp-profile-card {
   display: grid;
   min-height: 70px;
   grid-template-columns: 60px 1fr;
@@ -32,5 +32,9 @@
     padding-left: 10px;
     justify-self: start;
     align-self: center;
+  }
+
+  :hover {
+    cursor: pointer;
   }
 }

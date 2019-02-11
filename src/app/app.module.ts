@@ -10,7 +10,7 @@ import {
   RootComponent,
   HeaderComponent,
   MenuComponent,
-  ProfileComponent,
+  ProfileCardComponent,
   BodyComponent,
   FooterComponent,
 } from './root/components';
@@ -20,7 +20,7 @@ import {
     RootComponent,
     HeaderComponent,
     MenuComponent,
-    ProfileComponent,
+    ProfileCardComponent,
     BodyComponent,
     FooterComponent,
   ],
