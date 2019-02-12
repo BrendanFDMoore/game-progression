@@ -6,9 +6,9 @@
 
   .title {
     display: grid;
-    grid-template-columns: 1fr 250px;
+    grid-template-columns: 1fr 400px;
     grid-template-areas:
-      "text button";
+      "text buttons";
     background-color: $blue;
     color: $light-text;
     padding: 10px;
@@ -22,16 +22,26 @@
       font-size: 22px;
     }
 
-    .button {
-      grid-area: button;
+    .buttons {
+      grid-area: buttons;
       justify-self: end;
+      align-self: center;
+    }
+
+    .button {
       align-self: center;
       background-color: $light-blue;
       padding: 7px 50px;
+      margin-left: 10px;
       border: none;
       border-radius: 0.25rem;
       color: $blue;
       font-size: 14px;
+    }
+
+    .button-save {
+      background-color: $green;
+      color: $mirage;
     }
   }
 
