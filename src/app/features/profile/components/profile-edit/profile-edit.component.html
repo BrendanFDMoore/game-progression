@@ -14,21 +14,23 @@
   </div>
 
   <div class="body">
-    <div class="body-item">
-      <span class="item-title">First Name</span>
-      <div class="item-body"><input type="text" [formControl]="firstNameControl"></div>
-    </div>
-    <div class="body-item">
-        <span class="item-title">Last Name</span>
-        <div class="item-body"><input type="text" [formControl]="lastNameControl"></div>
+    <form [formGroup]="profileForm">
+      <div class="body-item">
+        <span class="item-title">First Name</span>
+        <div class="item-body"><input type="text" formControlName="firstName"></div>
       </div>
-    <div class="body-item">
-      <span class="item-title">Avatar Image URL</span>
-      <div class="item-body"><input type="text" [formControl]="avatarUrlControl"></div>
-    </div>
-    <div class="body-item">
-      <span class="item-title">Average number of hours to game per day</span>
-      <div class="item-body"><input type="text" [formControl]="hoursControl"></div>
-    </div>
+      <div class="body-item">
+          <span class="item-title">Last Name</span>
+          <div class="item-body"><input type="text" formControlName="lastName"></div>
+        </div>
+      <div class="body-item">
+        <span class="item-title">Avatar Image URL</span>
+        <div class="item-body"><input type="text" formControlName="avatarUrl"></div>
+      </div>
+      <div class="body-item">
+        <span class="item-title">Average number of hours to game per day</span>
+        <div class="item-body"><input type="text" formControlName="averageHours"></div>
+      </div>
+    </form>
   </div>
 </div>
