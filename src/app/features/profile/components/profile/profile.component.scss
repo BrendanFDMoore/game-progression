@@ -3,8 +3,64 @@
 .c-gp-profile {
   background-color: $light-blue;
   color: $dark-text;
+
+  .title {
+    display: grid;
+    grid-template-columns: 1fr 250px;
+    grid-template-areas:
+      "text button";
+    background-color: $blue;
+    color: $light-text;
+    padding: 5px 10px;
+    border-radius: 0.5rem;
+
+    .text {
+      grid-area: text;
+      justify-self: start;
+      align-self: center;
+      padding-left: 25px;
+      // font-weight: bold;
+      font-size: 22px;
+    }
+
+    .button {
+      grid-area: button;
+      justify-self: end;
+      align-self: center;
+      background-color: $light-blue;
+      padding: 5px 35px;
+      border: none;
+      border-radius: 0.25rem;
+      // padding-left: 25px;
+      // font-weight: bold;
+      // font-size: 24px;
+    }
+  }
+
+  .body {
+    display: grid;
+    margin-top: 20px;
+    grid-template-columns: 1fr;
+    // grid-template-areas:
+    //   "text button";
+    background-color: $blue;
+    color: $light-text;
+    padding: 5px 10px;
+    border-radius: 0.5rem;
+    text-align: left;
+
+    .body-item {
+      justify-self: start;
+      padding: 10px 5px;
+
+      .item-title {
+        justify-self: start;
+        font-weight: bold;
+      }
+      .item-body {
+        justify-self: start;
+      }
+    }
+  }
 }
 
-// :host {
-// host is the outer tag bits
-// }
