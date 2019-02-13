@@ -17,19 +17,54 @@
     <form [formGroup]="profileForm">
       <div class="body-item">
         <span class="item-title">First Name</span>
-        <div class="item-body"><input type="text" formControlName="firstName"></div>
+        <div class="item-body">
+          <input type="text" formControlName="firstName">
+          <span *ngIf="profileForm.controls.firstName.invalid
+              && (profileForm.controls.firstName.touched
+              || profileForm.controls.firstName.dirty)"
+            class="validation-error-message">
+              First name must be provided and may only consist of letters.
+          </span>
+        </div>
       </div>
       <div class="body-item">
           <span class="item-title">Last Name</span>
-          <div class="item-body"><input type="text" formControlName="lastName"></div>
+          <div class="item-body">
+            <input type="text" formControlName="lastName">
+            <span *ngIf="profileForm.controls.lastName.invalid
+                && (profileForm.controls.lastName.touched
+                || profileForm.controls.lastName.dirty)"
+              class="validation-error-message"
+            >
+                Last name must be provided and may only consist of letters.
+            </span>
+          </div>
         </div>
       <div class="body-item">
         <span class="item-title">Avatar Image URL</span>
-        <div class="item-body"><input type="text" formControlName="avatarUrl"></div>
+        <div class="item-body">
+          <input type="text" formControlName="avatarUrl">
+          <span *ngIf="profileForm.controls.avatarUrl.invalid
+              && (profileForm.controls.avatarUrl.touched
+              || profileForm.controls.avatarUrl.dirty)"
+            class="validation-error-message"
+          >
+              Image URL must be provided.
+          </span>
+        </div>
       </div>
       <div class="body-item">
         <span class="item-title">Average number of hours to game per day</span>
-        <div class="item-body"><input type="text" formControlName="averageHours"></div>
+        <div class="item-body">
+          <input type="text" formControlName="averageHours">
+          <span *ngIf="profileForm.controls.averageHours.invalid
+              && (profileForm.controls.averageHours.touched
+              || profileForm.controls.averageHours.dirty)"
+            class="validation-error-message"
+          >
+              Average Hours must be provided and must be a number greater than zero.
+          </span>
+        </div>
       </div>
     </form>
   </div>

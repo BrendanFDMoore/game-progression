@@ -68,5 +68,12 @@
       }
     }
   }
+
+  .validation-error-message {
+    display: block;
+    color: $red;
+    font-size: smaller;
+    font-weight: bold;
+  }
 }
 
