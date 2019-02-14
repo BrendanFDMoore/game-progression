@@ -89,8 +89,14 @@ export class ProfileEditComponent implements OnInit {
 
   cancel() {
     // confirmation dialog
-    this.fillFormFromProfile();
-    this.navigateToProfile();
+    if (this.profileForm.dirty) {
+      if (confirm('Are you sure you want to reset your changes?')) {
+        this.fillFormFromProfile();
+        this.navigateToProfile();
+      }
+    } else {
+      this.navigateToProfile();
+    }
   }
 
   save() {
@@ -107,7 +113,7 @@ export class ProfileEditComponent implements OnInit {
     this.profileForm.patchValue({
       firstName: this.profile.firstName,
       lastName: this.profile.lastName,
-      averageHours: this.profile.averageHours,
+      averageHours: this.profile.averageNumberOfHoursPerDay,
       avatarUrl: this.profile.image,
     });
   }
