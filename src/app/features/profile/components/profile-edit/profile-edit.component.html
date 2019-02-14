@@ -1,10 +1,10 @@
 <div class="c-gp-profile-edit" *ngIf="ready">
   <div class="title">
     <span class="text">
-      Edit Profile
+      Edit Profile {{profileForm.valid}}
     </span>
     <div class="buttons">
-      <button class="button button-save">
+      <button class="button button-save" [disabled]="!profileForm.valid" (click)="save()">
         SAVE
       </button>
       <button class="button" (click)="cancel()">

@@ -1,5 +1,5 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
-import { FormGroup, FormControl, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 
 import { ProfileService } from '../../services/profile.service';
 
@@ -30,6 +30,37 @@ export function alphaValidator(control: AbstractControl): {[key: string]: any} |
   return isAlpha(control.value) ? null : {'alphaValidator': {value: control.value}};
 }
 
+export interface AllValidationErrors {
+  control_name: string;
+  error_name: string;
+  error_value: any;
+}
+
+export interface FormGroupControls {
+  [key: string]: AbstractControl;
+}
+
+export function getFormValidationErrors(controls: FormGroupControls): AllValidationErrors[] {
+  let errors: AllValidationErrors[] = [];
+  Object.keys(controls).forEach(key => {
+    const control = controls[ key ];
+    if (control instanceof FormGroup) {
+      errors = errors.concat(getFormValidationErrors(control.controls));
+    }
+    const controlErrors: ValidationErrors = controls[ key ].errors;
+    if (controlErrors !== null) {
+      Object.keys(controlErrors).forEach(keyError => {
+        errors.push({
+          control_name: key,
+          error_name: keyError,
+          error_value: controlErrors[ keyError ]
+        });
+      });
+    }
+  });
+  return errors;
+}
+
 @Component({
   selector: 'gp-profile-edit',
   templateUrl: './profile-edit.component.html',
@@ -43,6 +74,7 @@ export class ProfileEditComponent implements OnInit {
     lastName: new FormControl('', [Validators.required, alphaValidator]),
     averageHours: new FormControl('', [Validators.required, regexValidator(/^[1-9][0-9]*$/)]),
     avatarUrl: new FormControl('', Validators.required),
+  // }, getFormValidationErrors);
   });
 
   constructor (
@@ -51,8 +83,17 @@ export class ProfileEditComponent implements OnInit {
 
   cancel() {
     // confirmation dialog
-    console.log(this.profileForm.controls.firstName);
-    // this.fillFormFromProfile();
+    this.fillFormFromProfile();
+    // nav to profile?
+  }
+
+  save() {
+    const formIsValid = this.profileFormIsValid();
+    if (formIsValid) {
+      console.log('ok saving!');
+    } else {
+      console.log('form not valid!');
+    }
     // nav to profile?
   }
 
@@ -63,6 +104,11 @@ export class ProfileEditComponent implements OnInit {
       averageHours: this.profile.averageHours,
       avatarUrl: this.profile.image,
     });
+  }
+
+  profileFormIsValid() {
+    const formErrors = getFormValidationErrors(this.profileForm.controls);
+    return formErrors.length === 0;
   }
 
   ngOnInit() {

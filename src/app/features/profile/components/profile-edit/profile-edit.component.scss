@@ -43,6 +43,11 @@
       background-color: $green;
       color: $mirage;
     }
+
+    .button-save:disabled {
+      background-color: $dove-gray;
+      opacity: 0.3;
+    }
   }
 
   .body {
@@ -70,7 +75,8 @@
   }
 
   .validation-error-message {
-    display: block;
+    // display: block;
+    padding-left: 10px;
     color: $red;
     font-size: smaller;
     font-weight: bold;
