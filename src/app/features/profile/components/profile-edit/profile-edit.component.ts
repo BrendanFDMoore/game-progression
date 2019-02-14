@@ -1,4 +1,5 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 
 import { ProfileService } from '../../services/profile.service';
@@ -78,23 +79,28 @@ export class ProfileEditComponent implements OnInit {
   });
 
   constructor (
+    private router: Router,
     private profileService: ProfileService,
   ) { }
+
+  navigateToProfile() {
+    this.router.navigate(['/my-profile']);
+  }
 
   cancel() {
     // confirmation dialog
     this.fillFormFromProfile();
-    // nav to profile?
+    this.navigateToProfile();
   }
 
   save() {
     const formIsValid = this.profileFormIsValid();
     if (formIsValid) {
       console.log('ok saving!');
+      this.navigateToProfile();
     } else {
       console.log('form not valid!');
     }
-    // nav to profile?
   }
 
   fillFormFromProfile() {
