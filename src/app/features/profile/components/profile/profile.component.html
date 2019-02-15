@@ -23,3 +23,29 @@
     </div>
   </div>
 </div>
+<span>Test ngrx: Loading: {{(profileNgrx$ | async)?.loading}}</span>
+<div class="c-gp-profile" *ngIf="(profileNgrx$ | async)?.profile">
+    <div class="title">
+      <span class="text">
+        My Profile NGRX
+      </span>
+      <button class="button" routerLink="/my-profile/edit">
+        EDIT
+      </button>
+    </div>
+
+    <div class="body">
+      <div class="body-item">
+        <span class="item-title">Name</span>
+        <div class="item-body">{{(profileNgrx$ | async)?.profile?.firstName}} {{(profileNgrx$ | async)?.profile?.lastName}}</div>
+      </div>
+      <div class="body-item">
+        <span class="item-title">Avatar Image URL</span>
+        <div class="item-body">{{(profileNgrx$ | async)?.profile?.image}}</div>
+      </div>
+      <div class="body-item">
+        <span class="item-title">Average Number of Hours to game per day</span>
+        <div class="item-body">{{(profileNgrx$ | async)?.profile?.averageNumberOfHoursPerDay}}</div>
+      </div>
+    </div>
+  </div>
