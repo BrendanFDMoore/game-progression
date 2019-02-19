@@ -70,12 +70,15 @@ export function getFormValidationErrors(controls: FormGroupControls): AllValidat
 export class ProfileEditComponent implements OnInit {
   public profile: any;
   public ready = false;
+  firstName = new FormControl('', [Validators.required, regexValidator(/^[a-zA-Z][a-zA-Z ]+[a-zA-Z]$/)]);
+  lastName = new FormControl('', [Validators.required, alphaValidator]);
+  averageHours = new FormControl('', [Validators.required, regexValidator(/^[1-9][0-9]*$/)]);
+  avatarUrl = new FormControl('', Validators.required);
   profileForm: FormGroup = new FormGroup({
-    firstName: new FormControl('', [Validators.required, regexValidator(/^[a-zA-Z][a-zA-Z ]+[a-zA-Z]$/)]),
-    lastName: new FormControl('', [Validators.required, alphaValidator]),
-    averageHours: new FormControl('', [Validators.required, regexValidator(/^[1-9][0-9]*$/)]),
-    avatarUrl: new FormControl('', Validators.required),
-  // }, getFormValidationErrors);
+    firstName: this.firstName,
+    lastName: this.lastName,
+    averageHours: this.averageHours,
+    avatarUrl: this.avatarUrl,
   });
 
   constructor (

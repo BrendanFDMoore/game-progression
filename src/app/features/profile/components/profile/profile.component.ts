@@ -32,6 +32,7 @@ export class ProfileComponent implements OnInit {
     console.log('profile constructor');
     this.store.select(selectProfile).subscribe(p => console.log(p));
     this.profileNgrx$ = this.store.select(selectProfile);
+    this.profileData$ = this.store.select(selectProfileData);
   }
 
   ngOnInit() {
