@@ -1,33 +1,8 @@
-<div class="c-gp-profile" *ngIf="ready">
-  <div class="title">
-    <span class="text">
-      My Profile
-    </span>
-    <button class="button" routerLink="/my-profile/edit">
-      EDIT
-    </button>
-  </div>
-
-  <div class="body">
-    <div class="body-item">
-      <span class="item-title">Name</span>
-      <div class="item-body">{{profile.firstName}} {{profile.lastName}}</div>
-    </div>
-    <div class="body-item">
-      <span class="item-title">Avatar Image URL</span>
-      <div class="item-body">{{profile.image}}</div>
-    </div>
-    <div class="body-item">
-      <span class="item-title">Average Number of Hours to game per day</span>
-      <div class="item-body">{{profile.averageNumberOfHoursPerDay}}</div>
-    </div>
-  </div>
-</div>
-<span>Test ngrx: Loading: {{(profileNgrx$ | async)?.loading}}</span>
-<div class="c-gp-profile" *ngIf="profileData$ | async">
+<span *ngIf="loading$ | async">LOADING</span>
+<div class="c-gp-profile" *ngIf="profile$ | async">
     <div class="title">
       <span class="text">
-        My Profile NGRX
+        My Profile
       </span>
       <button class="button" routerLink="/my-profile/edit">
         EDIT
@@ -37,15 +12,15 @@
     <div class="body">
       <div class="body-item">
         <span class="item-title">Name</span>
-        <div class="item-body">{{(profileData$ | async)?.firstName}} {{(profileData$ | async)?.lastName}}</div>
+        <div class="item-body">{{(profile$ | async)?.firstName}} {{(profile$ | async)?.lastName}}</div>
       </div>
       <div class="body-item">
         <span class="item-title">Avatar Image URL</span>
-        <div class="item-body">{{(profileData$ | async)?.image}}</div>
+        <div class="item-body">{{(profile$ | async)?.image}}</div>
       </div>
       <div class="body-item">
         <span class="item-title">Average Number of Hours to game per day</span>
-        <div class="item-body">{{(profileData$ | async)?.averageNumberOfHoursPerDay}}</div>
+        <div class="item-body">{{(profile$ | async)?.averageNumberOfHoursPerDay}}</div>
       </div>
     </div>
   </div>

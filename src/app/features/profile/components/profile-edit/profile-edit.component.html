@@ -1,10 +1,11 @@
-<div class="c-gp-profile-edit" *ngIf="ready">
+<span *ngIf="loading$ | async">LOADING</span>
+<div class="c-gp-profile-edit" *ngIf="profile$ | async">
   <div class="title">
     <span class="text">
-      Edit Profile {{profileForm.valid}}
+      Edit Profile
     </span>
     <div class="buttons">
-      <button class="button button-save" [disabled]="!profileForm.valid" (click)="save()">
+      <button class="button button-save" [disabled]="profileForm.pristine || (!profileForm.valid)" (click)="save()">
         SAVE
       </button>
       <button class="button" (click)="cancel()">

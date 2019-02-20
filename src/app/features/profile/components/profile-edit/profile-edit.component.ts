@@ -1,8 +1,14 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
+import { Store, select } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
-import { ProfileService } from '../../services/profile.service';
+import { Profile } from 'src/app/modules/user/models/profile.model';
+import * as fromUserStore from 'src/app/modules/user/store';
+import { currentId } from 'async_hooks';
+
+// import { ProfileService } from '../../services/profile.service';
 
 // interface ProfileForm {
 //   firstName: string;
@@ -13,20 +19,20 @@ import { ProfileService } from '../../services/profile.service';
 
 const isAlpha = s => {
   const result = /^[a-zA-Z][a-zA-Z ]+[a-zA-Z]$/.test(s);
-  console.log({isAlpha: result});
+  // console.log({isAlpha: result});
   return result;
 };
 
 export function regexValidator(regex: RegExp): ValidatorFn {
-  console.log('regexValidator outer');
+  // console.log('regexValidator outer');
   return (control: AbstractControl): {[key: string]: any} | null => {
-    console.log('regexValidator inner', control.value);
+    // console.log('regexValidator inner', control.value);
     return regex.test(control.value) ? null : {'regexValidator': {value: control.value}};
   };
 }
 
 export function alphaValidator(control: AbstractControl): {[key: string]: any} | null {
-  console.log('alphaValidator inner', control.value);
+  // console.log('alphaValidator inner', control.value);
   // const alpha = isAlpha(control.value);
   return isAlpha(control.value) ? null : {'alphaValidator': {value: control.value}};
 }
@@ -68,8 +74,10 @@ export function getFormValidationErrors(controls: FormGroupControls): AllValidat
   styleUrls: ['./profile-edit.component.scss']
 })
 export class ProfileEditComponent implements OnInit {
-  public profile: any;
-  public ready = false;
+  profile$: Observable<Profile>;
+  loading$: Observable<boolean>;
+  currentProfile: Profile;
+
   firstName = new FormControl('', [Validators.required, regexValidator(/^[a-zA-Z][a-zA-Z ]+[a-zA-Z]$/)]);
   lastName = new FormControl('', [Validators.required, alphaValidator]);
   averageHours = new FormControl('', [Validators.required, regexValidator(/^[1-9][0-9]*$/)]);
@@ -83,8 +91,19 @@ export class ProfileEditComponent implements OnInit {
 
   constructor (
     private router: Router,
-    private profileService: ProfileService,
-  ) { }
+    private store: Store<fromUserStore.UserState>
+  ) {
+    this.loading$ = this.store.select(fromUserStore.selectProfileLoading);
+    this.profile$ = this.store.select(fromUserStore.selectProfileDetails);
+    if (!this.currentProfile) {
+      this.store.select(fromUserStore.selectProfileDetails).subscribe(p => {
+        console.log({profileDetails: p});
+        this.currentProfile = p;
+        this.fillFormFromProfile();
+      });
+    }
+
+  }
 
   navigateToProfile() {
     this.router.navigate(['/my-profile']);
@@ -113,12 +132,16 @@ export class ProfileEditComponent implements OnInit {
   }
 
   fillFormFromProfile() {
-    this.profileForm.patchValue({
-      firstName: this.profile.firstName,
-      lastName: this.profile.lastName,
-      averageHours: this.profile.averageNumberOfHoursPerDay,
-      avatarUrl: this.profile.image,
-    });
+    console.log('fillFormFromProfile ... currently disabled!', {cp: this.currentProfile});
+    // TODO: FIGURE OUT BETTER WAY WITH OBSERVABLE PROFILE
+    if (this.currentProfile) {
+      this.profileForm.patchValue({
+        firstName: this.currentProfile.firstName,
+        lastName: this.currentProfile.lastName,
+        averageHours: this.currentProfile.averageNumberOfHoursPerDay,
+        avatarUrl: this.currentProfile.image,
+      });
+    }
   }
 
   profileFormIsValid() {
@@ -128,10 +151,6 @@ export class ProfileEditComponent implements OnInit {
 
   ngOnInit() {
     console.log('profile ngOnInit');
-    this.profileService.getProfile().subscribe((json) => {
-      this.profile = json;
-      this.ready = true;
-      this.fillFormFromProfile();
-    });
+    this.store.dispatch(new fromUserStore.LoadProfileRequest());
   }
 }

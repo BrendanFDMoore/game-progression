@@ -1,18 +1,21 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
-import { ProfileService } from '../../services/profile.service';
-import { Store, select, createSelector } from '@ngrx/store';
+// import { ProfileService } from '../../services/profile.service';
+import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { LoadUser } from '../../services/profile.service';
+// import { LoadProfileRequest, selectProfileDetails, selectProfileLoading, UserState } from 'src/app/modules/user/store';
+import { Profile } from 'src/app/modules/user/models/profile.model';
 
-export const selectProfile = (state: any) => {
-  console.log({state});
-  return state.profile;
-};
+import * as fromUserStore from 'src/app/modules/user/store';
 
-export const selectProfileData = createSelector(
-  selectProfile,
-  (state: any) => state.profile
-);
+// export const selectProfile = (state: any) => {
+//   console.log({state});
+//   return state.profile;
+// };
+
+// export const selectProfileData = createSelector(
+//   selectProfile,
+//   (state: any) => state.profile
+// );
 
 
 @Component({
@@ -21,26 +24,20 @@ export const selectProfileData = createSelector(
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-  public profile: any;
-  public ready = false;
-  profileNgrx$: Observable<any>;
+  profile$: Observable<Profile>;
+  loading$: Observable<boolean>;
 
   constructor (
-    private profileService: ProfileService,
-    private store: Store<any>
+    private store: Store<fromUserStore.UserState>
   ) {
     console.log('profile constructor');
-    this.store.select(selectProfile).subscribe(p => console.log(p));
-    this.profileNgrx$ = this.store.select(selectProfile);
-    this.profileData$ = this.store.select(selectProfileData);
+    // this.store.select(selectProfile).subscribe(p => console.log(p));
+    this.loading$ = this.store.select(fromUserStore.selectProfileLoading);
+    this.profile$ = this.store.select(fromUserStore.selectProfileDetails);
   }
 
   ngOnInit() {
     console.log('profile ngOnInit');
-    this.store.dispatch(new LoadUser());
-    this.profileService.getProfile().subscribe((json) => {
-      this.profile = json;
-      this.ready = true;
-    });
+    this.store.dispatch(new fromUserStore.LoadProfileRequest());
   }
 }
