@@ -1,5 +1,9 @@
 import { Component, OnInit, OnChanges } from '@angular/core';
-import { ProfileService } from '../../services/profile.service';
+import { Store, select } from '@ngrx/store';
+import { Observable } from 'rxjs';
+
+import { Profile } from 'src/app/modules/user/models/profile.model';
+import * as fromUserStore from 'src/app/modules/user/store';
 
 @Component({
   selector: 'gp-profile-card',
@@ -7,18 +11,18 @@ import { ProfileService } from '../../services/profile.service';
   styleUrls: ['./profile-card.component.scss']
 })
 export class ProfileCardComponent implements OnInit {
-  public profile: any;
-  public ready = false;
+  profile$: Observable<Profile>;
+  loading$: Observable<boolean>;
 
   constructor (
-    private profileService: ProfileService,
-  ) { }
+    private store: Store<fromUserStore.UserState>
+  ) {
+    this.loading$ = this.store.select(fromUserStore.selectProfileLoading);
+    this.profile$ = this.store.select(fromUserStore.selectProfileDetails);
+  }
 
   ngOnInit() {
     console.log('profile ngOnInit');
-    this.profileService.getProfile().subscribe((json) => {
-      this.profile = json;
-      this.ready = true;
-    });
+    this.store.dispatch(new fromUserStore.LoadProfileRequest());
   }
 }

@@ -1,11 +1,11 @@
-<div class="c-gp-profile-card" *ngIf="ready" routerLink="/my-profile">
+<div class="c-gp-profile-card" *ngIf="!!(profile$ | async)" routerLink="/my-profile">
   <div class="avatar">
-    <img src="{{'assets/' + profile.image}}" class="avatar-img">
+    <img src="{{'assets/' + (profile$|async)?.image}}" class="avatar-img">
   </div>
   <div class="name">
-    {{profile.firstName}} {{profile.lastName}}
+    {{(profile$|async)?.firstName}} {{(profile$|async)?.lastName}}
   </div>
 </div>
-<!-- <div class="c-gp-profile" *ngIf="!ready">
-  PROFILE NOT READY
-</div> -->
+<div class="c-gp-profile" *ngIf="!!(loading$ | async)">
+  PROFILE LOADING
+</div>
