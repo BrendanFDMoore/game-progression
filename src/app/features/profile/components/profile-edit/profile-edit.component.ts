@@ -1,8 +1,8 @@
-import { Component, OnInit, OnChanges } from '@angular/core';
+import { Component, OnInit, OnChanges, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 import { Store, select } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 
 import { Profile } from 'src/app/modules/user/models/profile.model';
 import * as fromUserStore from 'src/app/modules/user/store';
@@ -72,10 +72,11 @@ export function getFormValidationErrors(controls: FormGroupControls): AllValidat
   templateUrl: './profile-edit.component.html',
   styleUrls: ['./profile-edit.component.scss']
 })
-export class ProfileEditComponent implements OnInit {
+export class ProfileEditComponent implements OnInit, OnDestroy {
   profile$: Observable<Profile>;
   loading$: Observable<boolean>;
   currentProfile: Profile;
+  currentProfileSubscription: Subscription;
 
   firstName = new FormControl('', [Validators.required, regexValidator(/^[a-zA-Z][a-zA-Z ]+[a-zA-Z]$/)]);
   lastName = new FormControl('', [Validators.required, alphaValidator]);
@@ -95,7 +96,7 @@ export class ProfileEditComponent implements OnInit {
     this.loading$ = this.store.select(fromUserStore.selectProfileLoading);
     this.profile$ = this.store.select(fromUserStore.selectProfileDetails);
     if (!this.currentProfile) {
-      this.store.select(fromUserStore.selectProfileDetails).subscribe(p => {
+      this.currentProfileSubscription = this.store.select(fromUserStore.selectProfileDetails).subscribe(p => {
         console.log({profileDetails: p});
         this.currentProfile = p;
         this.fillFormFromProfile();
@@ -151,5 +152,9 @@ export class ProfileEditComponent implements OnInit {
   ngOnInit() {
     console.log('profile ngOnInit');
     this.store.dispatch(new fromUserStore.LoadProfileRequest());
+  }
+
+  ngOnDestroy() {
+    this.currentProfileSubscription.unsubscribe();
   }
 }
