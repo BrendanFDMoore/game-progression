@@ -10,10 +10,6 @@ import { environment } from '../environments/environment'; // Angular CLI enviro
 import { EffectsModule } from '@ngrx/effects';
 
 import { AppRoutingModule } from './app-routing.module';
-// import { ProfileService } from './root/services/profile.service';
-
-// import { profileReducer, initialProfileState } from './features/profile/services/profile.service';
-// import { ProfileEffects } from './features/profile/services/profile.service';
 
 import {
   RootComponent,

@@ -7,15 +7,6 @@ import { Observable, Subscription } from 'rxjs';
 import { Profile } from 'src/app/modules/user/models/profile.model';
 import * as fromUserStore from 'src/app/modules/user/store';
 
-// import { ProfileService } from '../../services/profile.service';
-
-// interface ProfileForm {
-//   firstName: string;
-//   lastName: string;
-//   averageHours: string;
-//   avatarUrl: string;
-// }
-
 const isAlpha = s => {
   const result = /^[a-zA-Z][a-zA-Z ]+[a-zA-Z]$/.test(s);
   // console.log({isAlpha: result});

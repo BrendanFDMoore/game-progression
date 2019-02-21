@@ -6,7 +6,6 @@ import {
   ProfileComponent,
   ProfileEditComponent,
 } from './components';
-// import { ProfileService } from './services/profile.service';
 
 import { ProfileRoutingModule } from './profile-routing.module';
 
@@ -21,8 +20,6 @@ import { ProfileRoutingModule } from './profile-routing.module';
     ReactiveFormsModule,
     ProfileRoutingModule
   ],
-  // providers: [
-  //   ProfileService,
-  // ],
+  providers: [ ],
 })
 export class ProfileModule { }
