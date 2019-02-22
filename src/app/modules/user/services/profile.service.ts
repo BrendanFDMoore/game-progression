@@ -30,4 +30,15 @@ export class ProfileService {
         catchError((error: any) => Observable.throw(error.json()))
       );
   }
+
+  /** POST profile JSON data from the server */
+  updateProfile (profile: Profile): Observable<Profile> {
+    console.log('start updateProfile');
+    return this.http
+      .put<Profile>(this.profileUrl, profile)
+      .pipe(
+        tap(_ => console.log('updated profile')),
+        catchError((error: any) => Observable.throw(error.json()))
+      );
+  }
 }

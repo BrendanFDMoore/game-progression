@@ -115,7 +115,17 @@ export class ProfileEditComponent implements OnInit, OnDestroy {
   save() {
     const formIsValid = this.profileFormIsValid();
     if (formIsValid) {
-      console.log('ok saving!');
+      const formValues = this.profileForm.value;
+      const newProfile = {
+        ...this.currentProfile,
+        firstName: formValues.firstName,
+        lastName: formValues.lastName,
+        image: formValues.avatarUrl,
+        averageNumberOfHoursPerDay: formValues.averageHours,
+      };
+      console.log('ok saving!', newProfile);
+      this.store.dispatch(new fromUserStore.UpdateProfileRequest(newProfile));
+
       this.navigateToProfile();
     } else {
       console.log('form not valid!');

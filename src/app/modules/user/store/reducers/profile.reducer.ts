@@ -17,13 +17,14 @@ export const initialState = {
 
 export const profileReducer = (state: ProfileState = initialState, action: ProfileAction) => {
   // console.log('profileReducer');
-  // console.log({action});
+  // console.log({currentState: state});
   switch (action.type) {
     case ProfileActionTypes.LoadProfileRequest:
       console.log('case ProfileActionTypes.LoadProfileRequest');
       return {
         ...state,
         loading: true,
+        details: null,
       };
 
     case ProfileActionTypes.LoadProfileSuccess:
