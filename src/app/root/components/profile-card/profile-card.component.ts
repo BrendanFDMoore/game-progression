@@ -17,6 +17,11 @@ export class ProfileCardComponent implements OnInit {
   constructor (
     private store: Store<fromUserStore.UserState>
   ) {
+    this.store.select(fromUserStore.selectProfileLoading)
+    .subscribe(l => {
+      console.log('>>>>>>>>>>>>>>>>>>>>');
+      console.log({loadingCard: l});
+    });
     this.loading$ = this.store.select(fromUserStore.selectProfileLoading);
     this.profile$ = this.store.select(fromUserStore.selectProfileDetails);
   }

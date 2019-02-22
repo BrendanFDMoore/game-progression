@@ -18,12 +18,12 @@ export class ProfileComponent implements OnInit {
     private store: Store<fromUserStore.UserState>
   ) {
     console.log('profile constructor');
-    this.loading$ = this.store.select(fromUserStore.selectProfileLoading);
-    this.profile$ = this.store.select(fromUserStore.selectProfileDetails);
   }
 
   ngOnInit() {
     console.log('profile ngOnInit');
     this.store.dispatch(new fromUserStore.LoadProfileRequest());
+    this.loading$ = this.store.select(fromUserStore.selectProfileLoading);
+    this.profile$ = this.store.select(fromUserStore.selectProfileDetails);
   }
 }
